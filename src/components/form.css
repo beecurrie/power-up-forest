@@ -2,3 +2,41 @@
     color: red;
     padding-left: 30px;
 }
+
+body {
+	background-image: url("https://i.ytimg.com/vi/m4P9XkF9gsI/maxresdefault.jpg");
+	text-align: center;
+}
+
+h1 {
+	font-family: 'Anton', sans-serif;
+	text-shadow: 4px 4px 8px #000000;
+	color: white;
+	letter-spacing: 1px;
+}
+
+form {
+width: 30%;
+margin: 0 auto;
+margin-top: 100px;
+padding: 30px;
+color: white;
+	background: rgba( 201, 253, 252, 0.45 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 10.5px );
+-webkit-backdrop-filter: blur( 10.5px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+input {
+	border: #9B9B9B;
+}
+
+#loginButton {
+	border: none;
+	margin-top: 20px;
+	width: 30%;
+	height: 30px;
+	border-radius: 10px;
+}
