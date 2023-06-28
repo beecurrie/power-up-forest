@@ -1,13 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\config",
     "\\public",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\dashboard",
+    "\\src\\app\\firebasedemo",
+    "\\src\\app\\login",
+    "\\src\\app\\page2",
     "\\src\\components",
     "\\src\\utils"
   ],
-  "SelectedNode": "\\src\\app\\page.css",
+  "SelectedNode": "\\src\\components\\form.css",
   "PreviewInSolutionExplorer": false
 }

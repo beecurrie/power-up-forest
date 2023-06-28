@@ -112,8 +112,9 @@ export default function Form({ formType }) {
     </form>
 
     <button onClick={ CheckLoggedInUser }>Check user</button>
+    <button onClick=
 
-    <SignOutButton />
+    // <SignOutButton /> (Why is this on the login/signup page? commented out for now)
     
     </>
     )

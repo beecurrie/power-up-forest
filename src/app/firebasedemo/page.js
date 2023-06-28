@@ -1,6 +1,11 @@
+
+      // this is the landing for once you login, here you can add a new project or open an existing one. maybe for dev purposes just the singular project that can be created and viewed.
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { doc, getDoc, collection, getDocs, query, where } from "firebase/firestore";
+
+import "./dash.css";
+import SignOutButton from './signout.js';
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -50,5 +55,10 @@ export default function Home() {
             <pre>{tasklist}</pre>
         </ul>
       </div>
+
+
+
+
+<SignOutButton />
     );
   }
