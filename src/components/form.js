@@ -95,7 +95,7 @@ export default function Form({ formType }) {
     <>
     <form className="loginSignupForm" onSubmit={handleSubmit}>
     <div>
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="email">Email: </label>
         <input
             type="text"
             id="email"
@@ -103,18 +103,16 @@ export default function Form({ formType }) {
         <span className="formError">{ emailError }</span>
     </div>
     <div>
-        <label htmlFor="password">Password:</label>
+        <label htmlFor="password">Password: </label>
         <input
             type="password"
             id="password"
         />
         <span className="formError">{ passwordError }</span>
     </div> 
-        <button type="submit">{formType === "login" ? "Login" : "Signup"}</button>
+        <button id="loginButton" type="submit">{formType === "login" ? "Login" : "Signup"}</button>
     </form>
     <button onClick={ CheckLoggedInUser }>Check user (debug)</button>
-
-    
     </>
     )
 }
