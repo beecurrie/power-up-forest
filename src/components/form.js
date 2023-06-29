@@ -29,6 +29,7 @@ export default function Form({ formType }) {
 
     // need to set the persistence to session
     setPersistence(auth, browserSessionPersistence);
+
     const loginUser = (email, password) => {
         signInWithEmailAndPassword (auth, email, password)
         .then((userCredential) => {
@@ -47,6 +48,7 @@ export default function Form({ formType }) {
             console.log("ErrorMessage :" + errorMessage);
         });
     }
+
     const createUser = (email, password) => {
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -78,7 +80,7 @@ export default function Form({ formType }) {
             setEmailError("A valid email is required");
             return;
         }
-        if (password === "" && password.length < 6) {   
+        if (password === "" || password.length < 6) {
             setPasswordError("Password is required and must be at least 6 characters");
             return;
         }
@@ -110,10 +112,8 @@ export default function Form({ formType }) {
     </div> 
         <button type="submit">{formType === "login" ? "Login" : "Signup"}</button>
     </form>
+    <button onClick={ CheckLoggedInUser }>Check user (debug)</button>
 
-    <button onClick={ CheckLoggedInUser }>Check user</button>
-
-    <SignOutButton />
     
     </>
     )
