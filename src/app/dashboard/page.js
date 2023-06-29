@@ -1,14 +1,20 @@
 "use client"
 
-import { getAuth } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut} from "firebase/auth";
 import { firebaseConfig } from '/config/firebaseApp.config.js';
 import { initializeApp } from 'firebase/app';
+import { useRouter } from 'next/navigation';
+import CheckLoggedInUser from 'src/utils/checkUserStatus.js';
 import { doc, getDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
+import React, { useState, useEffect } from 'react';
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 const auth = getAuth();
+const db = getFirestore(app);
+
+
+
 
 // function TableName() {
 //     return (
@@ -30,6 +36,13 @@ function TableRow({ task }) {
 
 function TableResults({ TaskList }) {
     const rows = [];
+    if (TaskList.length == 0) {
+        return (
+            <>
+            <p>No tasks found!</p>
+            </>
+        );
+    }
     TaskList.forEach((task) => {
         rows.push(<TableRow task={task} />);
     });
@@ -51,42 +64,67 @@ function TableResults({ TaskList }) {
     );
 }
 
-
-const user = auth.currentUser;
-if (!user) {
-    // if the user is not logged in we redirect them to the login page
-    console.log("Redirecting to login page");
-    
-}
-console.log("Result from user: " + user);
-console.log("Result from user.uid: " + user.uid);
-
-var TASKLIST = [];
-
-var q = query(collection(db, "tasks"), where("user_uid", "==", user.uid));
-var querySnapshot = await getDocs(q);
-
-querySnapshot.forEach((doc) => {
-    console.log(doc.id, " => ", doc.data());
-    TASKLIST.push(doc.data());
-});
-
 export default function Home() {
+    const router = useRouter();
+    const [uid, setUID] = useState("");
+
+    const callSignOut = async () => {
+        await signOut(auth).then(() => {
+            console.log("User signed out");
+            // with router, redirect to the main page
+            router.push("/");
+        }).catch((error) => {
+            console.log("Error signing out: " + error);
+        });
+    }
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (userData) => {
+            console.info(userData);
+            if (userData) {
+                // User is signed in
+                let userID = userData.uid;
+                console.log("User is signed in as :" + userID);
+                setUID(userID);
+            } else {
+                // if the user is not logged in we redirect them to the login page
+                console.log("User is not logged in. Redirecting to login page");
+                window.location.href = "/login";
+                router.push("/login");
+            }
+
+        })
+    }, []);
+    
+
+    var TASKLIST = [];
+    console.log("uid: " + uid)
+    var q = query(collection(db, "tasks"), where("user_uid", "==", uid));
+    var querySnapshot = getDocs(q).then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            console.log(doc.id, " => ", doc.data());
+            TASKLIST.push(doc.data());
+        });
+    });
 
     console.info(TASKLIST);
+
+    useEffect(() => {
+        
+    }, []);
 
     return (
         <div>
             <h1>Power Up Forest Dashboard</h1>
             <p>
-                Logged in as: <span id="user">{CheckLoggedInUser()}</span>
+                Logged in as: <span id="user">{uid}</span>
             </p>
 
             <button>Add task +</button>
-
             {/* need to get all of the tasks associated with the user id*/}
             
-            <TableResults taskList={TASKLIST} />
+            <TableResults TaskList={TASKLIST} />
+            <button onClick={callSignOut}>Log out</button>
 
         </div>
     );
