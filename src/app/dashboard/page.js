@@ -8,59 +8,16 @@ import CheckLoggedInUser from 'src/utils/checkUserStatus.js';
 import { doc, getDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import React, { useState, useEffect } from 'react';
-
+import Projects from "./projects.js";
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
 
-
-
-
-// function TableName() {
-//     return (
-//         <>task_name</>
-//     );
-// }
-
-function TableRow({ task }) {
+function TopBar() {
     return (
-        <tr>
-            <td>{ task["task_name"] }</td> {/* task_name */}
-            <td>{ task["task_start"] }</td> {/* task_start */}
-            <td>{ task["task_end"] }</td> {/* task_end */}
-            <td>{ task["task_notes"] }</td> {/* task_notes */}
-            <td>X</td>
-        </tr>
-    );
-}
-
-function TableResults({ TaskList }) {
-    const rows = [];
-    if (TaskList.length == 0) {
-        return (
-            <>
-            <p>No tasks found!</p>
-            </>
-        );
-    }
-    TaskList.forEach((task) => {
-        rows.push(<TableRow task={task} />);
-    });
-    return (
-        <table>
-            <thead>
-                <tr>
-                    <th>task_name</th>
-                    <th>task_start</th>
-                    <th>task_end</th>
-                    <th>task_notes</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {rows}
-            </tbody>
-        </table>
+        <div>
+            <button>← Back</button>
+        </div>
     );
 }
 
@@ -97,33 +54,22 @@ export default function Home() {
     }, []);
     
 
-    var TASKLIST = [];
-    console.log("uid: " + uid)
-    var q = query(collection(db, "tasks"), where("user_uid", "==", uid));
-    var querySnapshot = getDocs(q).then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            console.log(doc.id, " => ", doc.data());
-            TASKLIST.push(doc.data());
-        });
-    });
-
-    console.info(TASKLIST);
-
-    useEffect(() => {
-        
-    }, []);
 
     return (
         <div>
             <h1>Power Up Forest Dashboard</h1>
             <p>
-                Logged in as: <span id="user">{uid}</span>
+                (debug) Logged in as: <span id="user">{uid}</span>
             </p>
 
-            <button>Add task +</button>
-            {/* need to get all of the tasks associated with the user id*/}
-            
-            <TableResults TaskList={TASKLIST} />
+            <div>
+                {/* needs at top bar with back button and add task */}
+                <TopBar />
+                <Projects userID={uid}/>
+                {/* need to get all of the tasks associated with the user id*/}
+                
+                
+            </div>
             <button onClick={callSignOut}>Log out</button>
 
         </div>
