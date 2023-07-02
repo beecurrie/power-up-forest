@@ -8,7 +8,8 @@ import CheckLoggedInUser from 'src/utils/checkUserStatus.js';
 import { doc, getDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import React, { useState, useEffect } from 'react';
-import Projects from "./projects.js";
+import Projects from "src/components/projects.js";
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
@@ -52,7 +53,6 @@ export default function Home() {
 
         })
     }, []);
-    
 
 
     return (
@@ -63,11 +63,9 @@ export default function Home() {
             </p>
 
             <div>
-                {/* needs at top bar with back button and add task */}
                 <TopBar />
                 <Projects userID={uid}/>
-                {/* need to get all of the tasks associated with the user id*/}
-                
+            
                 
             </div>
             <button onClick={callSignOut}>Log out</button>
