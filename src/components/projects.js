@@ -4,7 +4,6 @@ import { getFirestore, doc, setDoc, collection, addDoc, getDocs, query, where, g
 import { firebaseConfig } from '/config/firebaseApp.config.js';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut} from "firebase/auth";
 import React, { useState, useEffect } from 'react';
-import "./projects.css";
 import Link from 'next/link';
 
 const app = initializeApp(firebaseConfig);
@@ -28,48 +27,30 @@ const addProject = async (e) => {
     });
     console.log("Document written with ID: ", docRef.id);
 }
-// async function AddProject( {project_name, project_tasks, uid} ) {
-//     const docRef = await addDoc(collection(db, "projects"), {
-//         "project_name": project_name,
-//         "project_tasks": project_tasks,
-//         "user_id": uid,
-//     });
-//     console.log("Document written with ID: ", docRef.id);
-// }
 
 
 function loadTasks() {
     
 }
 
-// async function getProjects(uid) {
-//     let projects = [];
-//     var q = query(collection(db, "projects"), where("user_id", "==", uid));
-//     var querySnapshot = await getDocsFromServer(q);
-//     querySnapshot.forEach((doc) => {
-//         console.log(doc.id, " => ", doc.data());
-//         projects.push(doc.data());
-//     });
-//     return projects;
-// }
 
 function addProjectBox() {
     // this function will add a new project box to the list
-    return ;
+    
 }
 
 export default function Projects({userID}) {
     // this fucntion will get the projects from the database and then display them in a list using ListItem from generic-list
     // the list will be generated using the map function
     // the data is fetched from the firebase database
-
-    const [projectList, setProjectList] = useState([]);
+    
     // const projectData = getProjects(userID);
     // useEffect(async () => {
         //     const projectList = await Promise.resolve(projectData);
         //     console.log(projectList);
         // }, []);
-
+        
+    const [projectList, setProjectList] = useState([]);
     console.log(userID);
     useEffect(() => {
         const q = query(collection(db, 'projects'), where('user_id', '==', userID));
@@ -90,7 +71,7 @@ export default function Projects({userID}) {
             <div className="list">
                 {projectList.map((project) => (
                     <Link href={"/dashboard/projects/" + project.id}>
-                        <ListItem key={project.id} item_name={project.project_name} item_completed={false} />
+                        <ListItem key={project.id} item_name={project.project_name} />
                     </Link>
 
                 ))}
@@ -100,7 +81,7 @@ export default function Projects({userID}) {
                     <input type="text" id="project-name" placeholder="Project Name" />
                     <button id="add-project" onClick={addProject}>Add Project</button>
                     </>
-                )} item_completed={false} />
+                )} />
             </div>
         </div>
     );
