@@ -4,7 +4,6 @@ import { getFirestore, doc, setDoc, collection, addDoc, getDocs, query, where, g
 import { firebaseConfig } from '/config/firebaseApp.config.js';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut} from "firebase/auth";
 import React, { useState, useEffect } from 'react';
-import "./projects.css";
 import Link from 'next/link';
 
 const app = initializeApp(firebaseConfig);
