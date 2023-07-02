@@ -8,6 +8,7 @@ import CheckLoggedInUser from 'src/utils/checkUserStatus.js';
 import { doc, getDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import React, { useState, useEffect } from 'react';
+import "./dash.css";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
@@ -115,16 +116,17 @@ export default function Home() {
 
     return (
         <div>
-            <h1>Power Up Forest Dashboard</h1>
-            <p>
-                Logged in as: <span id="user">{uid}</span>
+            <h1>Welcome to your Dashboard!</h1> 
+            <p id="userBanner">
+                Logged in as: <span id="user">{uid}</span> <button id="logout" onClick={callSignOut}>Log Out</button>
             </p>
 
-            <button>Add task +</button>
+            <button id="task">Add New Task +</button>
             {/* need to get all of the tasks associated with the user id*/}
             
-            <TableResults TaskList={TASKLIST} />
-            <button onClick={callSignOut}>Log out</button>
+           <div id="userTasks"> <h3>Your Tasks</h3>
+           <TableResults TaskList={TASKLIST} /></div>
+            
 
         </div>
     );
