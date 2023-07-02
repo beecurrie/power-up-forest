@@ -29,7 +29,7 @@ export default function Home() {
 
     return (
         <div>
-            <h1>Power Up Forest sign up</h1>
+            <h1>Sign Up</h1>
             <div>
                 <div className="signup">
                     <Form formType="signup" />

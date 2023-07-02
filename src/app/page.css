@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+
 
 body {
-	background-image: url("https://cdn.wallpapersafari.com/29/31/8Y7zC3.jpg");
+	background-image: url("https://images.hdqwalls.com/download/minimal-landscape-sunrise-4k-jy-1920x1080.jpg");
 	text-align: center;
 }
 
@@ -18,15 +18,10 @@ body {
 	border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
-h1, h6 {
-	font-family: 'Merriweather', serif;
+h1, h5, h6 {
 	text-shadow: 4px 4px 8px #000000;
 	color: white;
 	letter-spacing: 1px;
-}
-
-h5 {
-	color: #f5bad0;
 }
 
 

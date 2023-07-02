@@ -27,7 +27,7 @@ export default function Home() {
 
     return (
         <div>
-            <h1>Power Up Forest login</h1>
+            <h1>Login</h1>
             <div>
                 <div className="login">
                     <Form formType="login" />

@@ -1,9 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\public",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\authdemo",
     "\\src\\app\\dashboard",
     "\\src\\app\\firebasedemo",
     "\\src\\app\\login",
@@ -11,6 +11,6 @@
     "\\src\\components",
     "\\src\\utils"
   ],
-  "SelectedNode": "\\src\\components\\form.css",
+  "SelectedNode": "\\src\\app\\login\\page.js",
   "PreviewInSolutionExplorer": false
 }
