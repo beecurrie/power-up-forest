@@ -40,28 +40,16 @@ async function getTaskData(taskIDList) {
     }
     return taskList;
 }
+
+async function addTask() {
+    console.log("add task")
+} 
+
 export default function Home( { params } ) {
     // get the project ID from the URL
     // get the project tasks from the database
     // display the project tasks in a list
-    // the list will be generated using the map function
 
-    // useEffect(() => {
-    //     onAuthStateChanged(auth, (userData) => {
-    //         console.info(userData);
-    //         if (userData) {
-    //             // User is signed in
-    //             let userID = userData.uid;
-    //             console.log("User is signed in as :" + userID);
-    //             setUID(userID);
-    //         } else {
-    //             // if the user is not logged in we redirect them to the login page
-    //             console.log("User is not logged in. Redirecting to login page");
-    //             window.location.href = "/login";
-    //             router.push("/login");
-    //         }
-    //     })
-    // }, []);
     const [taskIDList, setTaskIDList] = useState([]);
     useEffect(() => {
         getProjectTasks(params.projectID).then(project => {
@@ -85,6 +73,14 @@ export default function Home( { params } ) {
             {taskList.map((task, index) => (
                 <ListItem key={index} item_name={task.task_name} item_completed={task.task_complete}/>
             ))}
+            <ListItem key="Add Task" item_name={(
+                    <>
+                    <form action={addTask}>
+                        <input type="text" id="project-name" placeholder="Task Name" />
+                        <button type="submit" id="add-project">Add Task</button>
+                    </form>
+                    </>
+                )} />
         </div>
     );        
 }
